@@ -1,0 +1,179 @@
+%==============================================================================
+% DEVELOPER RESUME - Rishita Tiwari
+% Compile with: pdflatex developer_resume.tex
+%==============================================================================
+
+\documentclass[11pt, a4paper]{article}
+
+%------------------------------------------------------------------------------
+% PACKAGES
+%------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=1.8cm, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{parskip}
+
+%------------------------------------------------------------------------------
+% COLORS
+%------------------------------------------------------------------------------
+\definecolor{accent}{HTML}{B8860B}   % Gold accent (Matching PRAVAH theme)
+\definecolor{darkgray}{HTML}{111827}
+\definecolor{medgray}{HTML}{374151}
+\definecolor{lightgray}{HTML}{6B7280}
+\definecolor{rulecol}{HTML}{F3F4F6}
+
+%------------------------------------------------------------------------------
+% HYPERLINK STYLE
+%------------------------------------------------------------------------------
+\hypersetup{
+    colorlinks=true,
+    urlcolor=accent,
+    linkcolor=accent,
+    pdftitle={Rishita Tiwari - Resume},
+}
+
+%------------------------------------------------------------------------------
+% SECTION FORMATTING
+%------------------------------------------------------------------------------
+\titleformat{\section}
+    {\large\bfseries\color{darkgray}}
+    {}{0em}{}
+    [\vspace{-4pt}\textcolor{rulecol}{\hrule height 1.5pt}\vspace{4pt}]
+
+\titlespacing{\section}{0pt}{10pt}{4pt}
+
+%------------------------------------------------------------------------------
+% CUSTOM COMMANDS
+%------------------------------------------------------------------------------
+
+\newcommand{\resumename}[1]{%
+    {\Huge\bfseries\color{darkgray} #1}%
+}
+
+\newcommand{\contactrow}[1]{%
+    \vspace{4pt}
+    {\small\color{medgray} #1}%
+}
+
+\newcommand{\entry}[4]{%
+    \noindent
+    \begin{tabularx}{\linewidth}{@{}X r@{}}
+        {\bfseries\color{darkgray} #1} \, {\color{accent}$|$} \, {\color{medgray}\itshape #2} &
+        {\small\color{lightgray} #4 \quad #3}
+    \end{tabularx}%
+    \vspace{1pt}%
+}
+
+\newenvironment{bullets}{%
+    \begin{itemize}[leftmargin=1.2em, itemsep=1pt, topsep=2pt, parsep=0pt]
+    \small\color{darkgray}
+}{%
+    \end{itemize}
+}
+
+\newcommand{\skillcat}[2]{%
+    \noindent{\bfseries\color{darkgray} #1: } {\small\color{medgray} #2}\\[3pt]%
+}
+
+%------------------------------------------------------------------------------
+% DOCUMENT
+%------------------------------------------------------------------------------
+\begin{document}
+\pagestyle{empty}
+
+%==============================================================================
+% HEADER
+%==============================================================================
+\begin{center}
+    \resumename{Rishita Tiwari}\\[6pt]
+    \contactrow{%
+        \faMapMarker* \, Navi Mumbai, India \quad
+        \faPhone* \, +91 [Your Phone] \quad
+        \faEnvelope[regular] \, \href{mailto:tiwaririshita@example.com}{tiwaririshita@example.com} \quad
+        \faGithub \, \href{https://github.com/Riri2018}{github.com/Riri2018} \quad
+        \faLinkedin \, \href{https://linkedin.com/in/rishita-tiwari}{linkedin.com/in/rishita-tiwari}
+    }
+\end{center}
+
+\vspace{2pt}
+
+%==============================================================================
+% SUMMARY
+%==============================================================================
+\section{Summary}
+Computer Engineering student with a strong focus on AI/ML and Full-stack Web Development. Passionate about building intelligent systems that solve real-world problems. Experienced in Python, JavaScript, and modern frameworks like FastAPI and Next.js. Recently developed a high-precision house price prediction system for Navi Mumbai using advanced Gradient Boosting algorithms.
+
+%==============================================================================
+% EDUCATION
+%==============================================================================
+\section{Education}
+
+\entry{B.E. in Computer Engineering}{Lokmanya Tilak College of Engineering}{2023 -- 2027 (Expected)}{Navi Mumbai}
+\begin{bullets}
+    \item Currently in 2nd Year. 
+    \item Relevant Coursework: Data Structures \& Algorithms, Object-Oriented Programming, Database Management Systems, Discrete Mathematics.
+\end{bullets}
+
+%==============================================================================
+% TECHNICAL SKILLS
+%==============================================================================
+\section{Technical Skills}
+
+\skillcat{Languages}{Python, JavaScript, TypeScript, HTML/CSS, SQL, Java}
+\skillcat{AI \& Data Science}{Scikit-learn, Pandas, NumPy, Gradient Boosting, Data Cleaning, Model Validation}
+\skillcat{Web Development}{Next.js, FastAPI, Node.js, Tailwind CSS, React.js}
+\skillcat{Databases}{PostgreSQL, MongoDB, SQL Server}
+\skillcat{Tools}{Git/GitHub, Docker, Render, Vercel, VS Code, LaTeX}
+
+%==============================================================================
+% PROJECTS
+%==============================================================================
+\section{Projects}
+
+%--- Project 1 ---
+\entry{PRAVAH - Navi Mumbai House Price Prediction AI}{\href{https://github.com/Riri2018/PRAVAH-Project}{github.com/Riri2018/PRAVAH-Project}}{2026}{}
+\begin{bullets}
+    \item Developed a full-stack ML application predicting property prices in Navi Mumbai with \textbf{94\% accuracy}.
+    \item Engineered a \textbf{GradientBoostingRegressor} pipeline handling 2,500+ listings and 15+ location clusters.
+    \item Built a high-performance backend using \textbf{FastAPI} and a premium "Midnight Gold" frontend with \textbf{Next.js 14}.
+    \item Implemented cinematic reveal animations and glassmorphism for enhanced user experience.
+\end{bullets}
+\vspace{6pt}
+
+%--- Project 2 ---
+\entry{Resource Allocation System}{Strategy Management Tool}{2025}{}
+\begin{bullets}
+    \item Built an allocation system for team-based competition strategy management.
+    \item Implemented role-based access for moderators and participants with real-time data persistence.
+    \item Generated automated performance reports and presentation-style slides for each team.
+\end{bullets}
+\vspace{6pt}
+
+%--- Project 3 ---
+\entry{Developer Resume Template}{LaTeX, Custom Styling}{2025}{}
+\begin{bullets}
+    \item Designed a clean, professional LaTeX template for developers to maintain version-controlled resumes.
+\end{bullets}
+
+%==============================================================================
+% ACHIEVEMENTS & CERTIFICATIONS
+%==============================================================================
+\section{Achievements \& Certifications}
+
+\begin{bullets}
+    \item \textbf{Academic Excellence}: Consistently maintained a strong SGPA in the first three semesters of Engineering.
+    \item \textbf{Open Source}: Actively contributing to personal and academic projects on GitHub.
+    \item \textbf{Technical Certification}: Completed courses in Professional Web Development and Python for Data Science.
+\end{bullets}
+
+\end{document}
