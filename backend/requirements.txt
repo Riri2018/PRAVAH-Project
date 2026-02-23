@@ -1,0 +1,23 @@
+# Navi Mumbai House Price Prediction - Backend Dependencies
+# Python 3.11+
+
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+gunicorn==23.0.0
+
+# ML
+scikit-learn==1.5.2
+joblib==1.4.2
+numpy==1.26.4
+pandas==2.2.3
+
+# HTTP
+httpx==0.28.1
+
+# Validation (comes with FastAPI)
+pydantic==2.10.3
+pydantic-settings==2.6.1
+
+# Utils
+python-dotenv==1.0.1

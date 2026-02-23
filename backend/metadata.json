@@ -1,0 +1,82 @@
+{
+  "model_version": "1.0.0",
+  "algorithm": "GradientBoostingRegressor",
+  "numeric_features": [
+    "Area_sqft",
+    "BHK",
+    "Bathrooms",
+    "Floor",
+    "Total_Floors",
+    "Age_of_Property",
+    "Parking",
+    "Lift",
+    "Floor_Ratio",
+    "BHK_Density"
+  ],
+  "categorical_features": [
+    "Location"
+  ],
+  "all_features": [
+    "Area_sqft",
+    "BHK",
+    "Bathrooms",
+    "Floor",
+    "Total_Floors",
+    "Age_of_Property",
+    "Parking",
+    "Lift",
+    "Floor_Ratio",
+    "BHK_Density",
+    "Location"
+  ],
+  "locations": [
+    "Airoli",
+    "Belapur",
+    "CBD Belapur",
+    "Ghansoli",
+    "Kharghar",
+    "Nerul",
+    "Panvel",
+    "Ulwe",
+    "Vashi"
+  ],
+  "bhk_options": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "target": "Actual_Price",
+  "train_metrics": {
+    "mae": 850708.59,
+    "rmse": 1082023.47,
+    "r2": 0.98
+  },
+  "test_metrics": {
+    "mae": 2432658.35,
+    "rmse": 3179999.97,
+    "r2": 0.86
+  },
+  "cv_r2_mean": 0.8226,
+  "cv_r2_std": 0.0193,
+  "training_samples": 1821,
+  "test_samples": 456,
+  "price_range_inr": {
+    "min": 984418,
+    "max": 69093705,
+    "mean": 14514982,
+    "median": 13531794
+  },
+  "top_features": {
+    "Area_sqft": 0.8705,
+    "BHK_Density": 0.0324,
+    "Age_of_Property": 0.0258,
+    "Floor_Ratio": 0.018,
+    "Total_Floors": 0.0141,
+    "Floor": 0.0135,
+    "BHK": 0.0068,
+    "Bathrooms": 0.0048,
+    "Lift": 0.0022,
+    "Parking": 0.0022
+  }
+}
