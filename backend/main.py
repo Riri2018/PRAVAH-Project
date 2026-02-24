@@ -65,7 +65,7 @@ def create_app() -> FastAPI:
     import os
     allowed_origins_str = os.getenv(
         "ALLOWED_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000,https://pravah-project.vercel.app,https://pravah-project-3.onrender.com"
+        "*"  # Allow all origins by default for easier deployment
     )
     
     logger.info(f"ALLOWED_ORIGINS environment variable: {allowed_origins_str}")
