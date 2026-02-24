@@ -15,8 +15,8 @@ pandas==2.2.3
 httpx==0.28.1
 
 # Validation (comes with FastAPI)
-pydantic==2.10.3
-pydantic-settings==2.6.1
+pydantic==2.8.2
+pydantic-settings==2.3.4
 
 # Utils
 python-dotenv==1.0.1

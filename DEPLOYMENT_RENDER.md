@@ -22,10 +22,11 @@ Render can automatically configure your service using the existing `render.yaml`
 
 ### Features included in `render.yaml`:
 - **Instance Type**: Free
-- **Build Command**: `pip install -r requirements.txt`
+- **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt`
 - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 - **Region**: Singapore (`singapore`)
 - **Health Check**: `/health`
+- **Python Version**: `3.11.0`
 
 ---
 
@@ -41,7 +42,7 @@ If you prefer to configure the service manually:
     - **Region**: `Singapore` (or closest to you)
     - **Branch**: `main`
     - **Root Directory**: `backend`
-    - **Build Command**: `pip install -r requirements.txt`
+    - **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt`
     - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 4.  **Plan**: Select **Free**.
 
@@ -73,6 +74,30 @@ Once the deployment status is **Live**, verify the API:
 
 ## 🔍 Troubleshooting
 
-- **No open HTTP ports detected**: This usually happens if the app binds to `127.0.0.1` instead of `0.0.0.0`, or if the start command is incorrect. Ensure you use `uvicorn main:app --host 0.0.0.0 --port $PORT`.
-- **Build Failures**: Check the "Logs" tab in Render. Ensure `backend/requirements.txt` does **not** include `gunicorn` to avoid version conflicts.
-- **502 Bad Gateway**: This can occur if the app takes too long to start or crashes during the health check. Using `uvicorn` directly helps minimize startup overhead.
+### Common Issues and Solutions
+
+#### 1. Pydantic/Rust Compilation Error
+**Error**: `error: failed to create directory /usr/local/cargo/registry/cache/`
+
+**Solution**: This happens when pydantic version requires Rust compilation. The `requirements.txt` has been updated to use `pydantic==2.8.2` which has pre-built wheels and doesn't require Rust.
+
+#### 2. No open HTTP ports detected
+**Solution**: Ensure the app binds to `0.0.0.0` instead of `127.0.0.1`. The `render.yaml` and `Procfile` have been configured correctly with:
+```
+uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+#### 3. Build Failures
+- Check the "Logs" tab in Render
+- Ensure `backend/requirements.txt` has compatible versions
+- Verify Python version is set to `3.11.0`
+
+#### 4. 502 Bad Gateway
+- App may be taking too long to start
+- Check if model file (`model.pkl`) exists in the backend directory
+- Review startup logs for errors during model loading
+
+#### 5. CORS Errors
+- Update `ALLOWED_ORIGINS` environment variable in Render dashboard
+- Add your Vercel frontend URL (e.g., `https://pravah-project.vercel.app`)
+- Multiple origins should be comma-separated

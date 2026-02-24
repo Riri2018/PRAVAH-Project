@@ -66,10 +66,10 @@ export default function PredictorForm() {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-12 mb-24">
-            <div className="animate-reveal reveal-delay-1 glass p-10 rounded-[2.5rem] gold-border">
-                <div className="flex justify-between items-center mb-10">
-                    <h2 className="text-2xl font-black text-white italic">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start mt-8 sm:mt-12 mb-16 sm:mb-24">
+            <div className="animate-reveal reveal-delay-1 glass p-6 sm:p-10 rounded-3xl sm:rounded-[2.5rem] gold-border">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 sm:mb-10">
+                    <h2 className="text-xl sm:text-2xl font-black text-white italic">
                         Property <span className="gold-text">Attributes</span>
                     </h2>
                     <div className="px-3 py-1 rounded-md bg-gold-500/10 border border-gold-500/20 text-[9px] font-bold text-gold-500 uppercase tracking-widest">
@@ -77,8 +77,8 @@ export default function PredictorForm() {
                     </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                         {[
                             { label: "Location Cluster", name: "location", type: "select", options: locations },
                             { label: "Dimensional Area (sq.ft)", name: "area_sqft", type: "number" },
@@ -113,7 +113,7 @@ export default function PredictorForm() {
                         ))}
                     </div>
 
-                    <div className="flex items-center gap-10 py-4 border-y border-white/5">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-10 py-4 border-y border-white/5">
                         <label className="flex items-center gap-3 cursor-pointer group">
                             <input
                                 type="checkbox"
@@ -137,7 +137,7 @@ export default function PredictorForm() {
                     <button
                         type="submit"
                         disabled={predicting}
-                        className="gold-button w-full uppercase tracking-[0.2em] text-xs py-5"
+                        className="gold-button w-full uppercase tracking-[0.2em] text-xs py-4 sm:py-5"
                     >
                         {predicting ? (
                             <div className="flex items-center justify-center gap-3">
@@ -157,39 +157,39 @@ export default function PredictorForm() {
                 )}
 
                 {result ? (
-                    <div className="animate-reveal glass p-10 rounded-[2.5rem] gold-border bg-gradient-to-br from-gold-500/10 to-transparent">
-                        <div className="flex justify-between items-start mb-8">
+                    <div className="animate-reveal glass p-6 sm:p-10 rounded-3xl sm:rounded-[2.5rem] gold-border bg-gradient-to-br from-gold-500/10 to-transparent">
+                        <div className="flex justify-between items-start mb-6 sm:mb-8">
                             <div>
                                 <h3 className="gold-text text-[10px] uppercase tracking-[0.3em] font-black mb-1">Valuation Summary</h3>
                                 <p className="text-white text-xs font-bold uppercase tracking-widest opacity-60">{result.location}</p>
                             </div>
-                            <div className="w-12 h-12 rounded-full border border-gold-500/20 flex items-center justify-center">
-                                <svg className="w-5 h-5 gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-500/20 flex items-center justify-center">
+                                <svg className="w-4 h-4 sm:w-5 sm:h-5 gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
                         </div>
 
-                        <div className="mb-10">
-                            <div className="text-6xl font-black text-white tracking-tighter mb-2">
-                                <span className="gold-text mr-3">₹</span>
-                                {result.predicted_price_lakhs} <span className="text-2xl opacity-40">L</span>
+                        <div className="mb-8 sm:mb-10">
+                            <div className="text-4xl sm:text-6xl font-black text-white tracking-tighter mb-2">
+                                <span className="gold-text mr-2 sm:mr-3">₹</span>
+                                {result.predicted_price_lakhs} <span className="text-xl sm:text-2xl opacity-40">L</span>
                             </div>
-                            <p className="text-gray-500 text-sm font-bold tracking-[0.2em]">INR {result.predicted_price_inr.toLocaleString()}</p>
+                            <p className="text-gray-500 text-xs sm:text-sm font-bold tracking-[0.2em]">INR {result.predicted_price_inr.toLocaleString()}</p>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-8 py-8 border-t border-white/10 mb-8">
+                        <div className="grid grid-cols-2 gap-6 sm:gap-8 py-6 sm:py-8 border-t border-white/10 mb-6 sm:mb-8">
                             <div>
                                 <p className="text-[9px] uppercase text-gray-500 font-black tracking-widest mb-1">Unit Valuation</p>
-                                <p className="text-lg font-bold text-white italic">₹{result.price_per_sqft_inr.toLocaleString()} <span className="text-[10px] opacity-40">/ft²</span></p>
+                                <p className="text-base sm:text-lg font-bold text-white italic">₹{result.price_per_sqft_inr.toLocaleString()} <span className="text-[10px] opacity-40">/ft²</span></p>
                             </div>
                             <div>
                                 <p className="text-[9px] uppercase text-gray-500 font-black tracking-widest mb-1">Model Precision</p>
-                                <p className="text-lg font-bold text-gold-500 italic">High Confidence</p>
+                                <p className="text-base sm:text-lg font-bold text-gold-500 italic">High Confidence</p>
                             </div>
                         </div>
 
-                        <div className="p-6 bg-black/40 rounded-3xl border border-white/5 mb-8">
+                        <div className="p-4 sm:p-6 bg-black/40 rounded-2xl sm:rounded-3xl border border-white/5 mb-6 sm:mb-8">
                             <p className="text-xs text-gray-400 leading-relaxed italic font-medium">
                                 "Analysis complete for <span className="text-white">{result.area_sqft} sqft</span> unit in <span className="text-white">{result.location}</span>. Asset performance is consistent with premium node trends."
                             </p>
@@ -213,16 +213,16 @@ export default function PredictorForm() {
                         </div>
                     </div>
                 ) : !predicting && (
-                    <div className="animate-reveal glass p-12 rounded-[2.5rem] h-[550px] flex flex-col items-center justify-center text-center group border-dashed border-white/10 hover:border-gold-500/20 transition-all duration-700">
-                        <div className="relative mb-10">
-                            <div className="w-24 h-24 bg-gold-500/5 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
-                                <svg className="w-10 h-10 gold-text opacity-30 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="animate-reveal glass p-8 sm:p-12 rounded-3xl sm:rounded-[2.5rem] h-[400px] sm:h-[550px] flex flex-col items-center justify-center text-center group border-dashed border-white/10 hover:border-gold-500/20 transition-all duration-700">
+                        <div className="relative mb-8 sm:mb-10">
+                            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gold-500/5 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
+                                <svg className="w-8 h-8 sm:w-10 sm:h-10 gold-text opacity-30 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                             </div>
                             <div className="absolute inset-0 bg-gold-500/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         </div>
-                        <h3 className="text-xl font-black text-white italic mb-3">Model Idle</h3>
+                        <h3 className="text-lg sm:text-xl font-black text-white italic mb-2 sm:mb-3">Model Idle</h3>
                         <p className="text-[10px] text-gray-500 max-w-[200px] font-bold uppercase tracking-[0.2em] leading-relaxed">
                             Awaiting property telemetry to generate market valuation report.
                         </p>

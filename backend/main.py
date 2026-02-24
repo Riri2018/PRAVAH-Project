@@ -65,7 +65,7 @@ def create_app() -> FastAPI:
     import os
     allowed_origins = os.getenv(
         "ALLOWED_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000,https://pravah-house.vercel.app"
+        "http://localhost:3000,http://127.0.0.1:3000,https://pravah-project.vercel.app"
     ).split(",")
 
     application.add_middleware(
