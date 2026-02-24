@@ -8,7 +8,7 @@
 - **Hosting**: Vercel
 
 ### Backend (Render)
-- **URL**: https://pravah-house-api.onrender.com (update if different)
+- **URL**: https://pravah-project-3.onrender.com
 - **Framework**: FastAPI
 - **Hosting**: Render (Free Tier)
 
@@ -31,7 +31,7 @@ PORT=8000
 Set these in your Vercel project settings under "Environment Variables":
 
 ```env
-NEXT_PUBLIC_API_URL=https://pravah-house-api.onrender.com
+NEXT_PUBLIC_API_URL=https://pravah-project-3.onrender.com
 ```
 
 ---
@@ -70,7 +70,7 @@ Or manually trigger deployment in Vercel dashboard.
 
 ### Backend Health Check
 ```bash
-curl https://pravah-house-api.onrender.com/health
+curl https://pravah-project-3.onrender.com/health
 ```
 
 Expected response:
@@ -128,11 +128,11 @@ https://pravah-project.vercel.app
 ## Testing URLs
 
 ### API Endpoints
-- Health: `https://pravah-house-api.onrender.com/health`
-- Docs: `https://pravah-house-api.onrender.com/docs`
-- Metadata: `https://pravah-house-api.onrender.com/api/v1/metadata`
-- Predict: `https://pravah-house-api.onrender.com/api/v1/predict` (POST)
-- Analytics: `https://pravah-house-api.onrender.com/api/v1/analytics/market-stats`
+- Health: `https://pravah-project-3.onrender.com/health`
+- Docs: `https://pravah-project-3.onrender.com/docs`
+- Metadata: `https://pravah-project-3.onrender.com/api/v1/metadata`
+- Predict: `https://pravah-project-3.onrender.com/api/v1/predict` (POST)
+- Analytics: `https://pravah-project-3.onrender.com/api/v1/analytics/market-stats`
 
 ### Frontend Pages
 - Home: `https://pravah-project.vercel.app/`
