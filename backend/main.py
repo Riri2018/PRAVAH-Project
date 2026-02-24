@@ -63,18 +63,33 @@ def create_app() -> FastAPI:
     # --- CORS ---
     # In production, specify your actual origins.
     import os
-    allowed_origins = os.getenv(
+    allowed_origins_str = os.getenv(
         "ALLOWED_ORIGINS",
         "http://localhost:3000,http://127.0.0.1:3000,https://pravah-project.vercel.app,https://pravah-project-3.onrender.com"
-    ).split(",")
-
-    application.add_middleware(
-        CORSMiddleware,
-        allow_origins=[origin.strip() for origin in allowed_origins if origin.strip()],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
     )
+    
+    logger.info(f"ALLOWED_ORIGINS environment variable: {allowed_origins_str}")
+    
+    # Allow all origins if set to "*"
+    if allowed_origins_str.strip() == "*":
+        logger.info("CORS: Allowing all origins (*)")
+        application.add_middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_credentials=False,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
+    else:
+        allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",") if origin.strip()]
+        logger.info(f"CORS: Allowing specific origins: {allowed_origins}")
+        application.add_middleware(
+            CORSMiddleware,
+            allow_origins=allowed_origins,
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
 
     # --- GZip compression ---
     application.add_middleware(GZipMiddleware, minimum_size=1000)
