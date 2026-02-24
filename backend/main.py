@@ -61,13 +61,16 @@ def create_app() -> FastAPI:
     )
 
     # --- CORS ---
+    # In production, specify your actual origins.
+    import os
+    allowed_origins = os.getenv(
+        "ALLOWED_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000,https://pravah-house.vercel.app"
+    ).split(",")
+
     application.add_middleware(
         CORSMiddleware,
-        allow_origins=[
-            "http://localhost:3000",
-            "https://*.vercel.app",
-            "https://pravah-house.vercel.app",  # Update with actual domain
-        ],
+        allow_origins=[origin.strip() for origin in allowed_origins if origin.strip()],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
