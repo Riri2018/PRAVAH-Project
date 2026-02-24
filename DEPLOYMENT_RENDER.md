@@ -23,7 +23,7 @@ Render can automatically configure your service using the existing `render.yaml`
 ### Features included in `render.yaml`:
 - **Instance Type**: Free
 - **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `gunicorn main:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT`
+- **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 - **Region**: Singapore (`singapore`)
 - **Health Check**: `/health`
 
@@ -42,7 +42,7 @@ If you prefer to configure the service manually:
     - **Branch**: `main`
     - **Root Directory**: `backend`
     - **Build Command**: `pip install -r requirements.txt`
-    - **Start Command**: `gunicorn main:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --timeout 120`
+    - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 4.  **Plan**: Select **Free**.
 
 ---
@@ -54,10 +54,10 @@ The following environment variables are configured via `render.yaml` but can be 
 | Key | Value | Description |
 | :--- | :--- | :--- |
 | `PYTHON_VERSION` | `3.11.0` | Ensures the correct Python runtime. |
-| `PORT` | `8000` | The internal port gunicorn binds to. |
+| `ALLOWED_ORIGINS` | `https://your-frontend.vercel.app` | List of allowed CORS origins. |
 
 > [!IMPORTANT]
-> If you have sensitive keys in `.env`, add them manually in the **Environment** tab on Render. **Do not push `.env` to GitHub.**
+> **Host Binding**: For local development, use `127.0.0.1:8000`. For Render deployment, use `--host 0.0.0.0`. This is necessary for Render's load balancer to find your application.
 
 ---
 
@@ -73,6 +73,6 @@ Once the deployment status is **Live**, verify the API:
 
 ## 🔍 Troubleshooting
 
-- **Build Failures**: Check the "Logs" tab in Render for dependency errors. Ensure `backend/requirements.txt` is up to date.
-- **Port Errors**: Render automatically assigns a `$PORT`. Ensure your Start Command uses `--bind 0.0.0.0:$PORT`.
-- **Memory Issues**: The Free tier has 512MB RAM. If the ML model is too large, the process might crash (R14 error).
+- **No open HTTP ports detected**: This usually happens if the app binds to `127.0.0.1` instead of `0.0.0.0`, or if the start command is incorrect. Ensure you use `uvicorn main:app --host 0.0.0.0 --port $PORT`.
+- **Build Failures**: Check the "Logs" tab in Render. Ensure `backend/requirements.txt` does **not** include `gunicorn` to avoid version conflicts.
+- **502 Bad Gateway**: This can occur if the app takes too long to start or crashes during the health check. Using `uvicorn` directly helps minimize startup overhead.
