@@ -25,12 +25,28 @@ export default function PredictorForm() {
     useEffect(() => {
         async function loadMeta() {
             try {
+                console.log("Fetching metadata from API...");
                 const meta = await getMetadata();
-                setLocations(meta.locations);
-                setFormData(prev => ({ ...prev, location: meta.locations[0] }));
+                console.log("Metadata received:", meta);
+                
+                if (!meta.locations || meta.locations.length === 0) {
+                    console.error("No locations in metadata");
+                    setError("No locations available. Please check backend.");
+                    // Fallback locations
+                    const fallbackLocations = ["Kharghar", "Vashi", "Panvel", "CBD Belapur", "Nerul"];
+                    setLocations(fallbackLocations);
+                    setFormData(prev => ({ ...prev, location: fallbackLocations[0] }));
+                } else {
+                    setLocations(meta.locations);
+                    setFormData(prev => ({ ...prev, location: meta.locations[0] }));
+                }
             } catch (err) {
+                console.error("Metadata fetch error:", err);
                 setError("Market Intelligence Link Fault. Ensure ML backend is active.");
-                console.error(err);
+                // Fallback locations
+                const fallbackLocations = ["Kharghar", "Vashi", "Panvel", "CBD Belapur", "Nerul"];
+                setLocations(fallbackLocations);
+                setFormData(prev => ({ ...prev, location: fallbackLocations[0] }));
             } finally {
                 setLoading(false);
             }
@@ -80,7 +96,7 @@ export default function PredictorForm() {
                 <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                         {[
-                            { label: "Location Cluster", name: "location", type: "select", options: locations },
+                            { label: "Location Cluster", name: "location", type: "select", options: locations.length > 0 ? locations : ["Loading..."] },
                             { label: "Dimensional Area (sq.ft)", name: "area_sqft", type: "number" },
                             { label: "BHK Configuration", name: "bhk", type: "select", options: [1, 2, 3, 4] },
                             { label: "Bathrooms", name: "bathrooms", type: "number", step: "0.5" },

@@ -42,11 +42,25 @@ export interface MetadataResponse {
  * Fetch model metadata for dropdowns.
  */
 export async function getMetadata(): Promise<MetadataResponse> {
-    const res = await fetch(`${API_BASE_URL}/api/v1/metadata`, {
+    const url = `${API_BASE_URL}/api/v1/metadata`;
+    console.log("Fetching metadata from:", url);
+    console.log("API_BASE_URL:", API_BASE_URL);
+    
+    const res = await fetch(url, {
         cache: "no-store",
     });
-    if (!res.ok) throw new Error("Failed to fetch metadata");
-    return res.json();
+    
+    console.log("Metadata response status:", res.status);
+    
+    if (!res.ok) {
+        const errorText = await res.text();
+        console.error("Metadata fetch failed:", errorText);
+        throw new Error("Failed to fetch metadata");
+    }
+    
+    const data = await res.json();
+    console.log("Metadata data:", data);
+    return data;
 }
 
 /**
