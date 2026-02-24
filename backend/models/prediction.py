@@ -112,6 +112,8 @@ class PredictionResponse(BaseModel):
 class HealthResponse(BaseModel):
     """API health status."""
 
+    model_config = {"protected_namespaces": ()}
+
     status: str
     model_loaded: bool
     model_version: str
